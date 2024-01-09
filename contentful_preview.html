@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contentful Preview</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #content { padding: 20px; margin: auto; width: 80%; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <!-- Content from Contentful will be displayed here -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const spaceId = '84x8zvm50ns1';
+            const accessToken = 'CFPAT-byqiyI8-PF4SkMGxdJylr1mf8lPEiJiSwTAt0Kk-_jw';
+            const entryId = 'apiUseCase'; // This can be dynamically set based on the URL
+
+            fetch(`https://cdn.contentful.com/spaces/${spaceId}/entries/${entryId}?access_token=${accessToken}`)
+            .then(response => response.json())
+            .then(data => {
+                const contentElement = document.getElementById('content');
+                contentElement.innerHTML = '<h1>' + data.fields.title + '</h1><p>' + data.fields.body + '</p>';
+            })
+            .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>
